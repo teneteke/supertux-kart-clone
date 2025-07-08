@@ -180,7 +180,7 @@ docker-compose build --no-cache
 
 ## 📊 Project Stats
 
-![GitHub stars](https://img.shields.io/github/stars/YOUR-USERNAME/supertux-kart-clone?style=social)
-![GitHub forks](https://img.shields.io/github/forks/YOUR-USERNAME/supertux-kart-clone?style=social)
-![GitHub issues](https://img.shields.io/github/issues/YOUR-USERNAME/supertux-kart-clone)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/YOUR-USERNAME/supertux-kart-clone)
+![GitHub stars](https://img.shields.io/github/stars/teneteke/supertux-kart-clone?style=social)
+![GitHub forks](https://img.shields.io/github/forks/teneteke/supertux-kart-clone?style=social)
+![GitHub issues](https://img.shields.io/github/issues/teneteke/supertux-kart-clone)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/teneteke/supertux-kart-clone)
