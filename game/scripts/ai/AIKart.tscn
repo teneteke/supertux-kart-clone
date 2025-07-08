@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd8x5f2mwqwky"]
+
+[ext_resource type="Script" path="res://scripts/ai/AIKart.gd" id="1_aikart"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(2, 0.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(2, 0.5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(1, 0.2, 0.2, 1)
+metallic = 0.3
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.2
+
+[node name="AIKart" type="RigidBody3D"]
+mass = 100.0
+gravity_scale = 1.0
+linear_damp = 0.2
+angular_damp = 1.0
+script = ExtResource("1_aikart")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1")
+
+[node name="KartBody" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="Wheels" type="Node3D" parent="."]
+
+[node name="WheelFL" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.8, -0.3, 1.2)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="WheelFR" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.8, -0.3, 1.2)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="WheelRL" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.8, -0.3, -1.2)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="WheelRR" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.8, -0.3, -1.2)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="EngineAudio" type="AudioStreamPlayer3D" parent="."]
+volume_db = -15.0
+pitch_scale = 1.0

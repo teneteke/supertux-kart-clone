@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://bopxu3xpgkxfb"]
+
+[ext_resource type="Script" path="res://scripts/player/Kart.gd" id="1_5q3pf"]
+[ext_resource type="Script" path="res://scripts/player/KartCamera.gd" id="2_camera"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(2, 0.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(2, 0.5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.6, 1, 1)
+metallic = 0.3
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.2
+
+[node name="Kart" type="RigidBody3D"]
+mass = 100.0
+gravity_scale = 1.0
+linear_damp = 0.2
+angular_damp = 1.0
+script = ExtResource("1_5q3pf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1")
+
+[node name="KartBody" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="Wheels" type="Node3D" parent="."]
+
+[node name="WheelFL" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.8, -0.3, 1.2)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="WheelFR" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.8, -0.3, 1.2)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="WheelRL" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.8, -0.3, -1.2)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="WheelRR" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.8, -0.3, -1.2)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 5)
+fov = 60.0
+script = ExtResource("2_camera")
+
+[node name="EngineAudio" type="AudioStreamPlayer3D" parent="."]
+volume_db = -10.0
+pitch_scale = 1.0

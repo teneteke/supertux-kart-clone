@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  godot-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: supertux-kart-dev
+    volumes:
+      - ./game:/workspace/game
+      - ./tools:/workspace/tools
+      - ./docs:/workspace/docs
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - PULSE_SERVER=unix:/tmp/pulse-socket
+    network_mode: host
+    stdin_open: true
+    tty: true
+    working_dir: /workspace
+    
+  # 開発用にGodotエディタを起動するサービス
+  godot-editor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: supertux-kart-editor
+    volumes:
+      - ./game:/workspace/game
+      - ./tools:/workspace/tools
+      - ./docs:/workspace/docs
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+    network_mode: host
+    stdin_open: true
+    tty: true
+    working_dir: /workspace/game
+    command: godot --editor
+    
+  # ヘッドレスビルド用サービス
+  godot-build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: supertux-kart-build
+    volumes:
+      - ./game:/workspace/game
+      - ./build:/workspace/build
+    working_dir: /workspace/game
+    command: godot --headless --export-release "Linux/X11" ../build/supertux-kart.x86_64
